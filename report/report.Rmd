@@ -1,0 +1,99 @@
+---
+title: "Report - Multiple Linear Regression"
+author: "Cheng Peng"
+date: "10/14/2016"
+output: pdf_document
+---
+
+## Abstract
+This report reproduced the main results displayed in section 3.2: Multiple Linear Regression of the book An Introduction to Statistical Learning.
+
+## Introduction
+The overall goal is to provide advice on how to improve sales of the particular product. More specifically, the idea is to develop an accurate model that can be used to predict sales on the basis of the three media budgets.
+
+## Data
+The data set `Advertising` is downloaded from the website. It consists of the Sales (in thousands of units) of a particular product in 200 different markets, along with advertising budgets (in thousands of dollars) for the product in each of those markets for three different media: TV, Radio, and Newspaper.
+
+## Methology
+To explore this multiple variable relationship, we use a multiple linear model and regress `sales` onto `TV`, `Radio`, `Newspaper` by fitting the model:
+
+$$Sales = \beta_{0} + \beta_{1} TV + \beta_{2} Radio + \beta_{3} Newspaper $$
+
+
+## Results
+
+
+#### Table 1: Simple Linear Regression on TV and Sales
+
+```{r, results='asis', echo=FALSE, message=FALSE}
+# Load data into report
+library(xtable)
+advertising = read.csv("../data/Advertising.csv", header = TRUE)
+lm <- lm(Sales ~ TV, data = advertising)
+summary <- summary(lm)
+print(xtable(summary$coefficient, caption = 'Simple Linear Regression - TV and Sales'), comment = FALSE, caption.placement = 'top')
+cat("\n")
+```
+
+#### Table 2: Simple Linear Regression on Radio and Sales
+
+```{r, results='asis', echo=FALSE, message=FALSE}
+lm <- lm(Sales ~ Radio, data = advertising)
+summary <- summary(lm)
+print(xtable(summary$coefficient, caption = 'Simple Linear Regression - Radio and Sales'), comment = FALSE, caption.placement = 'top')
+cat("\n")
+```
+
+
+#### Table 3: Simple Linear Regression on Newspaper and Sales
+
+```{r, results='asis', echo=FALSE, message=FALSE}
+lm <- lm(Sales ~ Newspaper, data = advertising)
+summary <- summary(lm)
+print(xtable(summary$coefficient, caption = 'Simple Linear Regression - Newspaper and Sales'), comment = FALSE, caption.placement = 'top')
+cat("\n")
+```
+
+
+#### Table 4: Regression Coefficients
+
+```{r, results='asis', echo=FALSE, message=FALSE}
+load("../data/regression.RData")
+load("../data/correlation-matrix.RData")
+print(xtable(summary$coefficient, caption = 'Multiple Linear Regression Coefficients'), comment = FALSE, caption.placement = 'top')
+```
+
+For the Advertising data, least squares coefficient estimates of the multiple linear regression of number of units sold on radio, TV, and newspaper advertising budgets.
+
+We see that `TV`, `Radio` and `Newspaper` all  have very small p-value, which rejects the null hypothesis and shows that they have an impact on the sales data.
+
+I think the linear model fits the data well. However, even though we fit correctly the linear model, the predictions will not be as accurate as we imagine it to be.
+
+
+#### Table 5: Correlation Matrix
+
+```{r, results='asis', echo=FALSE, message=FALSE}
+print(xtable(cor, caption = 'Correlations Matrix'), comment = FALSE, caption.placement = 'top')
+```
+
+
+#### Table 6: Regression Quality Indices
+
+```{r, results='asis', echo=FALSE, message=FALSE}
+source('../code/functions/regression-functions.R')
+RSE = residual_std_error(lm_ad)
+R_square = r_squared(lm_ad)
+f_statistic = f_statistic(lm_ad)
+
+df = data.frame(Quantity= c("Residual Standard Error", "R-squared",
+                            "F-statistic"), Value = c(RSE, R_square,
+                                                      f_statistic))
+print(xtable(df, caption = 'Regression Quality Indices'), 
+      comment = FALSE, caption.placement = 'top')
+```
+
+
+
+
+## Conclusions
+I explored the linear relationship between TV, Radio and Newspapers versus Sales with a multiple linear regression model. 

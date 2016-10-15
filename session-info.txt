@@ -1,0 +1,20 @@
+R version 3.2.3 (2015-12-10)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: OS X 10.12 (unknown)
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] testthat_1.0.2 car_2.1-1     
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_0.12.3        lattice_0.20-33    crayon_1.3.2       MASS_7.3-45       
+ [5] R6_2.1.1           grid_3.2.3         MatrixModels_0.4-1 nlme_3.1-122      
+ [9] magrittr_1.5       SparseM_1.7        minqa_1.2.4        nloptr_1.0.4      
+[13] Matrix_1.2-3       splines_3.2.3      lme4_1.1-10        tools_3.2.3       
+[17] pbkrtest_0.4-4     parallel_3.2.3     mgcv_1.8-9         nnet_7.3-11       
+[21] quantreg_5.19     
